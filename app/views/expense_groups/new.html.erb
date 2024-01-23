@@ -1,0 +1,14 @@
+
+<h1>Create Expense Group</h1>
+
+<%= form_with(model: @expense_group, url: expense_groups_path, method: :post) do |form| %>
+
+  <div>
+    <%= form.label :name, "Group Name" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= form.submit "Create Group" %>
+  </div>
+<% end %>

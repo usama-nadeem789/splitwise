@@ -1,0 +1,12 @@
+<h1>List of friends</h1>
+<%= button_to 'Add new friend' , new_friendship_path, method: :get%>
+<% if @friendship.any? %>
+  <ul>
+    <% @friendship.each do |friend| %>
+      <li><%= friend.email %></li>
+      <%= button_to 'Remove Friend', friendship_path(friend), method: :delete %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You don't have any friend</p>
+<% end %>

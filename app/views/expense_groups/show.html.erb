@@ -1,0 +1,50 @@
+<h1><%= @expense_group.name %></h1>
+
+<% if @expense_group.created_by == current_user.email %>
+  <%= button_to "Add Members", add_friends_expense_group_path(@expense_group), method: :get %>
+  <%= button_to "Delete Group", @expense_group, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<% end %>
+
+
+<h2>Members in this Group:</h2>
+<ul>
+  <% @expense_group.users.each do |friend| %>
+    <li>
+      <%= friend.email %>
+
+      <% if friend == current_user %>
+      <% elsif @expense_group.created_by == current_user.email %>
+        <%= button_to "Remove", remove_friend_expense_group_path(@expense_group, user_id: friend.id), method: :delete %>
+      <% end %>
+      
+    </li>
+  <% end %>
+</ul>
+
+
+<h2>Expenses:</h2>
+<ul>
+  <% @expense_group.expenses.each do |expense| %>
+    <li>
+      Amount : <%= expense.amount %>, Paid by : <%= expense.user.email %>
+      <% if @expense_group.created_by == current_user.email %>
+        <%= button_to "Delete", expense_group_expense_path(@expense_group, expense), method: :delete%>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>User Balances:</h2>
+<ul>
+  <% @user_balances.each do |user, balance| %>
+    <% if user.is_a?(User) %>
+      <li> <%= user.email %> owes :  <%= balance %> in total </li>
+    <% else %>
+      <strong><%= user %>:</strong> <%= balance%> , 
+    <% end %>
+  <% end %>
+</ul>
+
+<% if @expense_group.created_by == current_user.email %>
+  <%= link_to "Add Expense", new_expense_group_expense_path(@expense_group) %>
+<% end %>

@@ -1,0 +1,13 @@
+<h1>Add member to group </h1>
+
+<%= form_with(url: create_membership_expense_group_path(@expense_group), method: :post) do |form| %>
+  <div>
+    <%= form.label :user_id, "Select Friend to Add" %>
+    <%= form.collection_select(:user_id, @friends, :id, :email, { prompt: "Select a friend" }, { required: true }) %>
+  </div>
+
+  <div>
+    <%= form.submit "Add Friend" %>
+  </div>
+<% end %>
+

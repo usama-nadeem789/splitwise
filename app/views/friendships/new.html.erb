@@ -1,0 +1,7 @@
+<h1>Add a Friend</h1>
+
+<%= form_with(model: Friendship.new, url: friendships_path, method: :post) do |form| %>
+  <%= form.label :email, "Enter Friend Email" %>
+  <%= form.text_field :email, required: true%>
+  <%= form.submit "Add Friend" %>
+<% end %>

@@ -1,0 +1,21 @@
+
+<h1>Dashboard</h1>
+
+<%= button_to "Create Group" , new_expense_group_path, method: :get%>
+<%= button_to "Friends" , friendships_path, method: :get%>
+<%= button_to "Sign Out", destroy_user_session_path, method: :delete%>
+
+
+<h1>Your Expense Groups</h1>
+
+<% if @expense_groups.any? %>
+  <ul>
+    <% @expense_groups.each do |expense_group| %>
+      <li>
+        <%= link_to expense_group.name, expense_group %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You are not a member of any expense groups.</p>
+<% end %>
